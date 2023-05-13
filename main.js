@@ -701,6 +701,7 @@ const gameControler = {
 
 
     canvas.addEventListener("touchmove",(e)=>{
+      alert("hellow");
       switch(gameControler.step) {
         case 1 :{
           let x = e.touches[0].clientX;
