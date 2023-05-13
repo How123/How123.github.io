@@ -675,7 +675,7 @@ const gameControler = {
   touchInput(){
     
     canvas.addEventListener("touchstart",(e)=>{
-      switch(gameControler.step) {
+            switch(gameControler.step) {
         case 0 :{
           gameControler.gameStart();
           break;
@@ -685,6 +685,8 @@ const gameControler = {
           let y = e.touches[0].clientY;
           gameControler.touchX = x;
           gameControler.touchY = y;
+
+          alert(x,y);
 
 
           break;
