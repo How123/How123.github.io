@@ -664,6 +664,25 @@ const gameControler = {
 
 
 
+  },
+
+  touchInput(){
+    
+    canvas.addEventListener("touchstart",(e)=>{
+      if(gameControler.step != 1) {
+        gameControler.gameStart();
+      }
+
+    });
+    // canvas.addEventListener("touchstart",(e)=>{
+      
+    // });
+    // canvas.addEventListener("touchstart",(e)=>{
+      
+    // });
+    // canvas.addEventListener("touchstart",(e)=>{
+      
+    // });
   }
 
 };
@@ -1292,34 +1311,10 @@ function endStep() {
 
 
 
-function getEventPosition(e){
-  var x,y;
-
-};
 
 
 
-
-canvas.addEventListener('click',function(e){
-  //p = getEventPosition(e);
-
-  gameControler.gameStart();
-  let x = e.layerX;
-  let y = e.layerY;
-  console.log(x,y);
-});
-
-
-
+gameControler.touchInput();
 gameControler.keyboardInput();
 loop();
 
-
-
-
-
-
-
-
-
-//
