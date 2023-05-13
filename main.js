@@ -298,6 +298,12 @@ const gameControler = {
   turnL :false,
   turnAngle : 0,
 
+  touchX ,
+  touchY ,
+
+
+
+
   count:0,
 
 
@@ -669,20 +675,52 @@ const gameControler = {
   touchInput(){
     
     canvas.addEventListener("touchstart",(e)=>{
-      if(gameControler.step != 1) {
-        gameControler.gameStart();
-      }
+      switch(gameControler.step) {
+        case 0 :{
+          gameControler.gameStart();
+          break;
+        }
+        case 1 :{
+          let x = e.touches[0].clientX;
+          let y = e.touches[0].clientY;
+          gameControler.touchX = x;
+          gameControler.touchY = y;
 
+
+          break;
+        }
+        case 2 :{
+          gameControler.gameStart();
+          break;
+        }
+      }
+      
+      
     });
-    // canvas.addEventListener("touchstart",(e)=>{
+
+
+
+    canvas.addEventListener("touchmove",(e)=>{
+      switch(gameControler.step) {
+        case 1 :{
+          let x = e.touches[0].clientX;
+          let y = e.touches[0].clientY;
+
+          if(x > gameControler.touchX) {
+            gameControler.plCommond.d = true;
+          }
+
+          break;
+        }
+      }
       
-    // });
-    // canvas.addEventListener("touchstart",(e)=>{
       
-    // });
-    // canvas.addEventListener("touchstart",(e)=>{
-      
-    // });
+    });
+
+
+
+
+
   }
 
 };
