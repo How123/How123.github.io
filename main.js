@@ -701,9 +701,23 @@ const gameControler = {
 
 
     canvas.addEventListener("touchmove",(e)=>{
-      alert("hellow");
       switch(gameControler.step) {
         case 1 :{
+          let x = e.touches[0].clientX;
+          let y = e.touches[0].clientY;
+
+          if(x > gameControler.touchX) {
+            gameControler.plCommond.d = true;
+          }
+          else if(x < gameControler.touchX) {
+            gameControler.plCommond.a = true;
+          }
+
+          if(y < gameControler.touchY-100) {
+            gameControler.plCommond.w = true;
+          }
+
+
           gameControler.gameStart();
           break;
         }
