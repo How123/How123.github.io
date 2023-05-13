@@ -298,8 +298,7 @@ const gameControler = {
   turnL :false,
   turnAngle : 0,
 
-  touchX  : 0,
-  touchY  : 0,
+  touchTrack : [],
 
 
 
@@ -675,18 +674,18 @@ const gameControler = {
   touchInput(){
     
     canvas.addEventListener("touchstart",(e)=>{
+      let x = e.touches[0].clientX;
+      let y = e.touches[0].clientY;
+      let touch = {x:x,y,y};
+      gameControler.touchTrack.push(touch);
+
+
       switch(gameControler.step) {
         case 0 :{
           gameControler.gameStart();
           break;
         }
         case 1 :{
-          let x = e.touches[0].clientX;
-          let y = e.touches[0].clientY;
-          gameControler.touchX = x;
-          gameControler.touchY = y;
-
-
           break;
         }
         case 2 :{
@@ -701,35 +700,50 @@ const gameControler = {
 
 
     canvas.addEventListener("touchmove",(e)=>{
+      let last = gameControler.touchTrack.slice(-1);
+      let x = e.touches[0].clientX;
+      let y = e.touches[0].clientY;
+      let touch = {x:x,y,y};
+      gameControler.touchTrack.push(touch);
+
       switch(gameControler.step) {
         case 1 :{
-          let x = e.touches[0].clientX;
-          let y = e.touches[0].clientY;
-
-          if(x > gameControler.touchX) {
+          if(x > last.x) {
             gameControler.plCommond.d = true;
           }
-          else if(x < gameControler.touchX) {
+          else if(x < last.x) {
             gameControler.plCommond.a = true;
           }
 
-          if(y < gameControler.touchY-100) {
+          if(y < gameControler.touchTrack[0]-100) {
             gameControler.plCommond.w = true;
           }
 
 
-          gameControler.gameStart();
           break;
         }
-      }
-      
-      
+      }  
     });
 
 
 
 
+    canvas.addEventListener("touchend",(e)=>{
+      gameControler.touchTrack =[];
 
+      if(gameControler.plCommond.a) {
+        gameControler.plCommond.a = false;
+        gameControler.plCommond.stop = true;
+      }
+      if(gameControler.plCommond.d) {
+        gameControler.plCommond.d = false;
+        gameControler.plCommond.stop = true;
+      }
+      if(gameControler.plCommond.w) {
+        gameControler.plCommond.w = false;
+        gameControler.plCommond.jumpCancel=true;
+      }
+    });
   }
 
 };
