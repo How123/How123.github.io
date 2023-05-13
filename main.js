@@ -1300,7 +1300,6 @@ function getEventPosition(e){
 
 
 
-
 canvas.addEventListener('click',function(e){
   //p = getEventPosition(e);
 
