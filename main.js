@@ -675,12 +675,13 @@ const gameControler = {
   touchInput(){
     
     canvas.addEventListener("touchstart",(e)=>{
-            switch(gameControler.step) {
+      switch(gameControler.step) {
         case 0 :{
           gameControler.gameStart();
           break;
         }
         case 1 :{
+
           let x = e.touches[0].clientX;
           let y = e.touches[0].clientY;
           gameControler.touchX = x;
@@ -706,12 +707,13 @@ const gameControler = {
       alert("hellow");
       switch(gameControler.step) {
         case 1 :{
-          let x = e.touches[0].clientX;
-          let y = e.touches[0].clientY;
+          gameControler.gameStart();
+          // let x = e.touches[0].clientX;
+          // let y = e.touches[0].clientY;
 
-          if(x > gameControler.touchX) {
-            gameControler.plCommond.d = true;
-          }
+          // if(x > gameControler.touchX) {
+          //   gameControler.plCommond.d = true;
+          // }
 
           break;
         }
@@ -719,6 +721,10 @@ const gameControler = {
       
       
     });
+
+    // canvas.addEventListener("touchmove",(e) => {
+
+    // });
 
 
 
