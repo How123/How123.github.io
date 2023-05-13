@@ -681,10 +681,10 @@ const gameControler = {
           break;
         }
         case 1 :{
-          let x = e.touches[0].clientX;
-          let y = e.touches[0].clientY;
-          gameControler.touchX = x;
-          gameControler.touchY = y;
+          //let x = e.touches[0].clientX;
+          //let y = e.touches[0].clientY;
+          //gameControler.touchX = x;
+          //gameControler.touchY = y;
 
 
           break;
