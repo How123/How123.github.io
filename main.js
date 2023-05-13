@@ -298,8 +298,8 @@ const gameControler = {
   turnL :false,
   turnAngle : 0,
 
-  touchX ,
-  touchY ,
+  touchX  : 0,
+  touchY  : 0,
 
 
 
@@ -681,13 +681,10 @@ const gameControler = {
           break;
         }
         case 1 :{
-
           let x = e.touches[0].clientX;
           let y = e.touches[0].clientY;
           gameControler.touchX = x;
           gameControler.touchY = y;
-
-          alert(x,y);
 
 
           break;
@@ -708,23 +705,12 @@ const gameControler = {
       switch(gameControler.step) {
         case 1 :{
           gameControler.gameStart();
-          // let x = e.touches[0].clientX;
-          // let y = e.touches[0].clientY;
-
-          // if(x > gameControler.touchX) {
-          //   gameControler.plCommond.d = true;
-          // }
-
           break;
         }
       }
       
       
     });
-
-    // canvas.addEventListener("touchmove",(e) => {
-
-    // });
 
 
 
