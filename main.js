@@ -676,7 +676,7 @@ const gameControler = {
     canvas.addEventListener("touchstart",(e)=>{
       let x = e.touches[0].clientX;
       let y = e.touches[0].clientY;
-      let touch = {x:x,y,y};
+      let touch = {x:x,y:y};
       gameControler.touchTrack.push(touch);
 
 
@@ -700,23 +700,42 @@ const gameControler = {
 
 
     canvas.addEventListener("touchmove",(e)=>{
-      let last = gameControler.touchTrack.slice(-1);
+      let last = gameControler.touchTrack[gameControler.touchTrack.length-1];
       let x = e.touches[0].clientX;
       let y = e.touches[0].clientY;
-      let touch = {x:x,y,y};
+      let touch = {x:x,y:y};
       gameControler.touchTrack.push(touch);
-
+      console.log(last.x);
+      
       switch(gameControler.step) {
         case 1 :{
           if(x > last.x) {
             gameControler.plCommond.d = true;
+            gameControler.plCommond.a = false;
+            //console.log("right");
           }
           else if(x < last.x) {
             gameControler.plCommond.a = true;
+            gameControler.plCommond.d = false;
+            //console.log("left");
+          }
+          else {
+            //console.log(x,y);
+            //console.log(last.x,last.y);
           }
 
-          if(y < gameControler.touchTrack[0]-100) {
+          if(y < gameControler.touchTrack[0].y-100) {
             gameControler.plCommond.w = true;
+          }
+
+          if(y > gameControler.touchTrack[0].y+100) {
+            if(x > last.x && gameControler.turnR ==false) {
+              gameControler.turnL = true;
+            }
+            if(x < last.x && gameControler.turnL ==false) {
+              gameControler.turnR = true;
+            }
+
           }
 
 
