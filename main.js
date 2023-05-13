@@ -154,7 +154,6 @@ class mapData {
       element.velY = vy;
     });
 
-    console.log(this.spawns);
 
     
 
@@ -189,8 +188,6 @@ class mapData {
       element.velX = vx;
       element.velY = vy;
     });
-
-    console.log(this.spawns);
 
     
 
@@ -305,7 +302,6 @@ const gameControler = {
 
 
   turnGame() {
-    console.log(this.turnR,this.turnL);
 
     if(this.turnR) {
       turnCanvas(1);
@@ -469,7 +465,6 @@ const gameControler = {
     PL.die(true);
   },
 
-
   endStep() {
     map.draw();
     balls.forEach(element => {
@@ -485,26 +480,24 @@ const gameControler = {
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
     ctx.strokeStyle = "black";
-    ctx.fillText(str, xc, 250);
-    ctx.strokeText(str, xc, 250);
+    ctx.fillText(str, xc, yc-50);
+    ctx.strokeText(str, xc, yc-50);
 
 
   
     //count++;
     ctx.font = "25pt Arial"; 
     str = "SCORE : " + this.count;
-    ctx.fillText(str, xc, yc);
-    ctx.strokeText(str, xc, yc);
+    ctx.fillText(str, xc, yc+60);
+    ctx.strokeText(str, xc, yc+60);
 
     ctx.font = "25pt Arial"; 
     str = "press ENTER to restart";
-    ctx.fillText(str, xc, yc+50);
-    ctx.strokeText(str, xc, yc+50);
+    ctx.fillText(str, xc, yc+110);
+    ctx.strokeText(str, xc, yc+110);
 
 
   },
-
-
 
   menuStep() {
     map.draw();
@@ -526,7 +519,6 @@ const gameControler = {
     ctx.fillText(str, xc, 320);
     ctx.strokeText(str, xc , 320);
   },
-
 
   gammingStep(){
     
@@ -570,39 +562,37 @@ const gameControler = {
   },
 
 
-creatBall(){
-  const size = 15;
-  const vel = 10;
-  let i = random(0,map.spawns.length-1);
-  //console.log(i);
+  creatBall(){
+    const size = 15;
+    const vel = 10;
+    let i = random(0,map.spawns.length-1);
+    //console.log(i);
 
-  let spawn = map.spawns[i];  
-  let ball = new Ball(
-    spawn.x,
-    spawn.y,
-    (spawn.velX === 0) ? randomFloat(-0.75,0.75) * vel : spawn.velX * vel *1,
-    (spawn.velY === 0) ? randomFloat(-0.75,0.75) * vel : spawn.velY * vel *1,
-    "white",
-    size
-  );
-  balls.push(ball);
-  console.log(ball);
-},
+    let spawn = map.spawns[i];  
+    let ball = new Ball(
+      spawn.x,
+      spawn.y,
+      (spawn.velX === 0) ? randomFloat(-0.75,0.75) * vel : spawn.velX * vel *1,
+      (spawn.velY === 0) ? randomFloat(-0.75,0.75) * vel : spawn.velY * vel *1,
+      "white",
+      size
+    );
+    balls.push(ball);
+  },
 
-
-
-
-
-
-
-
+  gameStart() {
+    this.step = 1;
+    map = map1.copy();
+    PL = new player(map.plInitial.x,map.plInitial.y,'rgb(255,255,255)', 16);
+    balls = [];
+    this.count = 0;
+  },
 
 
   keyboardInput() {
     let that = this;
     window.onkeydown = function(e) {
       
-    console.log(that.plCommond);
         switch(e.key) {
         //move
         case 'w' : {
@@ -634,11 +624,7 @@ creatBall(){
         //
         case 'Enter' :
           if(that.step != 1) {
-            that.step = 1;
-            map = map1.copy();
-            PL = new player(map.plInitial.x,map.plInitial.y,'rgb(255,255,255)', 16);
-            balls = [];
-            that.count = 0;
+            that.gameStart();
           }
           break;
         // default:
@@ -681,19 +667,6 @@ creatBall(){
   }
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -966,7 +939,7 @@ class player {
   setVel(cmd) {
     if(cmd.w) {
       if(this.jummping <2) {
-        this.velY = -15;
+        this.velY = -12;
         this.jummping++;
       }
       
@@ -1314,6 +1287,28 @@ function endStep() {
   ctx.fillText("SCORE : " + count, 400, 50);
   ctx.strokeText("SCORE : " + count, 400, 50);
 }
+
+
+
+
+
+function getEventPosition(e){
+  var x,y;
+
+};
+
+
+
+
+
+canvas.addEventListener('click',function(e){
+  //p = getEventPosition(e);
+
+  gameControler.gameStart();
+  let x = e.layerX;
+  let y = e.layerY;
+  console.log(x,y);
+});
 
 
 

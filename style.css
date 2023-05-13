@@ -1,6 +1,8 @@
-  
+
+
 html, body {
     margin: 0;
+    background: black;
   }
   
   html {
@@ -24,3 +26,19 @@ html, body {
     color: transparent;
     text-shadow: 0 0 4px white;
   }
+  
+  .wrap {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  } 
+
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
